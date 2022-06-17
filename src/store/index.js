@@ -1,9 +1,11 @@
 import LoginStore from "./loginStore";
+import PokerStore from "./PokerStore";
 import React from "react";
 
 class RootStore {
   constructor() {
     this.loginStore = new LoginStore();
+    this.pokerStore = new PokerStore();
   }
 }
 
