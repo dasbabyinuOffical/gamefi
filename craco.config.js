@@ -1,5 +1,5 @@
 const path = require("path");
-
+const { loaderByName, addBeforeLoader } = require("@craco/craco");
 module.exports = {
   // webpack 配置
   webpack: {

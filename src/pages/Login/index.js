@@ -1,8 +1,12 @@
+// import startbg from "@/assets/images/startbg.mp4";
 import { Link } from "react-router-dom";
-import startbg from "@/assets/images/startbg.mp4";
 import "./index.scss";
+import { useStore } from "@/store";
 
 function Login() {
+  const { loginStore } = useStore();
+  const startbg = loginStore.getBg();
+
   return (
     <>
       <div className="container">
