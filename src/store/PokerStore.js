@@ -11,7 +11,7 @@ class PokerStore {
   initMusic = () => {
     console.log("initMusic");
     // 初始化设置洗牌
-    this.music = xipai;
+    this.setMusic("xipai");
   };
 
   initPokerList = () => {
@@ -31,7 +31,6 @@ class PokerStore {
   setMusic = (action) => {
     if (action === "xipai") {
       this.music = xipai;
-      return;
     }
     if (action === "fapai") {
       this.music = fapai;

@@ -22,6 +22,7 @@ function MidPlayer() {
 
   // 洗牌audio
   const audioRef = useRef(null);
+  const mediaRef = useRef(null);
 
   // 响应洗牌和发牌
   function playerAction() {
@@ -49,7 +50,10 @@ function MidPlayer() {
 
   // 发牌
   function sendPoker() {
-    console.log("fapai");
+    // 播放发牌音乐
+    pokerStore.setMusic("fapai");
+    console.log("fapai:", pokerStore.music);
+    mediaRef.current.play();
   }
 
   return (
@@ -108,7 +112,7 @@ function MidPlayer() {
       <div className="music1" style={{ position: "absolute" }}>
         <audio ref={audioRef} src={pokerStore.music}></audio>
       </div>
-      <audio className="music2" src={fapai}></audio>
+      <audio className="music2" ref={mediaRef} src={fapai}></audio>
     </div>
   );
 }
