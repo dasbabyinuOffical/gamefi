@@ -1,51 +1,63 @@
-import { useState, useRef, useEffect } from "react";
-import xipai from "@/assets/music/xipai.mp3";
+import { useRef, useEffect, useState } from "react";
+import fapai from "@/assets/music/fapai.mp3";
 import "@/components/animate.css";
+import { useStore } from "@/store";
+import { observer } from "mobx-react-lite";
 
 function MidPlayer() {
-  //初始牌
-  const [pokers, setPokers] = useState([]);
+  // 初始化存储
+  const { pokerStore } = useStore();
+
+  const [player, setPlayer] = useState({});
+
+  // 初始化牌
   useEffect(() => {
-    const pokerList = [];
-    for (let i = 0; i < 54; i++) {
-      pokerList.push({
-        index: i,
-        class: "back",
-        top: "-" + i + "px",
-        animation: "",
-      });
-    }
-    setPokers(pokerList);
+    console.log("useEffect......");
+    pokerStore.initMusic();
+    pokerStore.initPokerList();
+    setPlayer({
+      step: "xipai",
+    });
   }, []);
 
   // 洗牌audio
   const audioRef = useRef(null);
 
+  // 响应洗牌和发牌
+  function playerAction() {
+    if (player.step === "xipai") {
+      clearPoker();
+    }
+    if (player.step === "fapai") {
+      sendPoker();
+    }
+  }
+
   // 洗牌
   function clearPoker() {
-    //把初始牌组数据的顺序打乱,想乱一些，i的值可以设置更大一些
     // 洗牌音效
     audioRef.current.play();
-
-    const pokerList = pokers.map((item, index) => {
-      if (index < 27) {
-        item.animation = "run-1-0 9s linear " + index / 10 + "s 1";
-      } else {
-        item.animation = "run-1-0 6s linear " + index / 10 + "s 1";
-      }
-      return item;
-    });
-    setPokers(pokerList);
+    // 洗牌动画
+    pokerStore.animation();
     setTimeout(() => {
       audioRef.current.pause();
+      setPlayer({
+        step: "fapai",
+      });
     }, 12000);
+  }
+
+  // 发牌
+  function sendPoker() {
+    console.log("fapai");
   }
 
   return (
     <div className="mid">
       <div className="mid_top">
-        <ul className="all_poker" onClick={clearPoker}>
-          {pokers.map((item) => (
+        <div>{pokerStore.aa}</div>
+        <ul className="all_poker" onClick={playerAction}>
+          {pokerStore.pokerList.map((item) => (
             <li
               className={item.class}
               key={item.index}
@@ -94,10 +106,11 @@ function MidPlayer() {
         </div>
       </div>
       <div className="music1" style={{ position: "absolute" }}>
-        <audio ref={audioRef} src={xipai}></audio>
+        <audio ref={audioRef} src={pokerStore.music}></audio>
       </div>
+      <audio className="music2" src={fapai}></audio>
     </div>
   );
 }
 
-export default MidPlayer;
+export default observer(MidPlayer);
