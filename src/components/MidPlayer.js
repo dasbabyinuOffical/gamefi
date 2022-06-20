@@ -54,18 +54,41 @@ function MidPlayer() {
     pokerStore.setMusic("fapai");
     console.log("fapai:", pokerStore.music);
     mediaRef.current.play();
+    setTimeout(() => {
+      mediaRef.current.pause();
+    }, 100 * pokerStore.pokerList.length);
+    // 设置最后一张牌的动画效果
+    pokerStore.pokerList.forEach((item, index) => {
+      const css = {};
+      if (index % 3 === 0) {
+        css.animation = "send-1 1s";
+      }
+      if (index % 3 === 1) {
+        css.animation = "send-2 1s";
+      }
+      if (index % 3 === 2) {
+        css.animation = "send-3 1s";
+      }
+      setTimeout(() => {
+        pokerStore.setAnimation(index, css);
+      }, 100 * index);
+      console.log("sleep 1s");
+    });
   }
 
   return (
     <div className="mid">
       <div className="mid_top">
-        <div>{pokerStore.aa}</div>
         <ul className="all_poker" onClick={playerAction}>
           {pokerStore.pokerList.map((item) => (
             <li
               className={item.class}
               key={item.index}
-              style={{ top: item.top, animation: item.animation }}
+              style={{
+                top: `${item.top}px`,
+                left: `${item.left}px`,
+                animation: item.animation,
+              }}
             ></li>
           ))}
         </ul>
@@ -112,7 +135,7 @@ function MidPlayer() {
       <div className="music1" style={{ position: "absolute" }}>
         <audio ref={audioRef} src={pokerStore.music}></audio>
       </div>
-      <audio className="music2" ref={mediaRef} src={fapai}></audio>
+      <audio className="music2" ref={mediaRef} src={fapai} loop></audio>
     </div>
   );
 }

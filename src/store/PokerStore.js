@@ -3,10 +3,43 @@ import xipai from "@/assets/music/xipai.mp3";
 import fapai from "@/assets/music/fapai.mp3";
 class PokerStore {
   pokerList = observable([]);
+  allPoker = observable([]);
+  pokerIndex = 0;
   constructor() {
     makeAutoObservable(this);
     this.music = "";
+    this.initAllPoker();
   }
+
+  get leftPokerIndex() {
+    return this.pokerIndex;
+  }
+
+  get midPokerIndex() {
+    return this.pokerIndex + 1;
+  }
+
+  get rightPokerIndex() {
+    return this.pokerIndex + 2;
+  }
+
+  initAllPoker = () => {
+    //将普通牌放入数据中
+    for (let i = 1; i <= 13; i++) {
+      for (let j = 0; j < 4; j++) {
+        this.allPoker.push({ num: i, color: j });
+      }
+    }
+    // 将大小王放入数据中
+    this.allPoker.push({ num: 14, color: 0 });
+    this.allPoker.push({ num: 14, color: 1 });
+    for (let i = 0; i < 10; i++) {
+      this.allPoker.sort(function (x, y) {
+        return Math.random() - 0.5;
+      });
+    }
+    console.log(this.allPoker);
+  };
 
   initMusic = () => {
     console.log("initMusic");
@@ -22,8 +55,9 @@ class PokerStore {
       this.pokerList.push({
         index: i,
         class: "back",
-        top: "-" + i + "px",
+        top: -i,
         animation: "",
+        left: 0,
       });
     }
   };
@@ -55,6 +89,12 @@ class PokerStore {
       return item;
     });
     this.setPokerList(pokerList);
+  };
+
+  setAnimation = (index, css) => {
+    this.pokerList[index].animation = css.animation;
+    this.pokerList[index].top = css.top;
+    this.pokerList[index].left = css.left;
   };
 }
 

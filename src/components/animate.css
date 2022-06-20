@@ -34,6 +34,24 @@
     }
 }
 
+/* 发牌动画 */
+@keyframes send-1 {
+    100% {
+        transform: scale3d(1, 1, 1) translateX(-600px) translateY(250px)
+    }
+}
+
+@keyframes send-2 {
+    100% {
+        transform: scale3d(1, 1, 1) translateY(600px)
+    }
+}
+
+@keyframes send-3 {
+    100% {
+        transform: scale3d(1, 1, 1) translateX(600px) translateY(250px)
+    }
+}
 
  /* 把桌面的三张牌使用动画方法翻开 */
 @keyframes run-2-0{

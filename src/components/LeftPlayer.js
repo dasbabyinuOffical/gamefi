@@ -1,4 +1,17 @@
+import { useStore } from "@/store";
+import { observer } from "mobx-react-lite";
+import { useState, useEffect } from "react";
+import Poker from "./Poker";
+import uuid from "react-uuid";
+
 function LeftPlayer() {
+  const { pokerStore } = useStore();
+  const [index, setIndex] = useState();
+
+  useEffect(() => {
+    setIndex(pokerStore.leftPokerIndex);
+  }, [pokerStore.leftPokerIndex]);
+
   return (
     <div className="left">
       <div className="left-computer">
@@ -12,6 +25,9 @@ function LeftPlayer() {
               <span className="player-roles" id="nongmin">
                 {" "}
               </span>
+              {pokerStore.allPoker.map((poker) => (
+                <Poker key={uuid()} num={poker.num} color={poker.color} />
+              ))}
             </div>
             <span className="jindou" id="jindou">
               3750
@@ -40,4 +56,4 @@ function LeftPlayer() {
   );
 }
 
-export default LeftPlayer;
+export default observer(LeftPlayer);
