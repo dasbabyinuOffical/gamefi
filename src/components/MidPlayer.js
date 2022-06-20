@@ -3,6 +3,7 @@ import fapai from "@/assets/music/fapai.mp3";
 import "@/components/animate.css";
 import { useStore } from "@/store";
 import { observer } from "mobx-react-lite";
+import uuid from "react-uuid";
 
 function MidPlayer() {
   // 初始化存储
@@ -128,7 +129,22 @@ function MidPlayer() {
             </span>
           </div>
           <div className="cards">
-            <ul className="play_2"></ul> {/*手牌*/}
+            <ul className="play_2">
+              {pokerStore.midPoker.map((poker) => (
+                <li
+                  key={uuid()}
+                  data-num={poker.num}
+                  data-color={poker.color}
+                  style={{
+                    width: "125px",
+                    height: "175px",
+                    background: `url(${poker.background}) ${poker.x}px ${poker.y}px`,
+                    left: `${poker.left}px`,
+                  }}
+                ></li>
+              ))}
+            </ul>{" "}
+            {/*手牌*/}
           </div>
         </div>
       </div>

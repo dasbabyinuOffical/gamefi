@@ -1,4 +1,10 @@
+import { useStore } from "@/store";
+import { observer } from "mobx-react-lite";
+import uuid from "react-uuid";
+
 function RightPlayer() {
+  const { pokerStore } = useStore();
+  console.log(pokerStore.rightPoker.length);
   return (
     <div className="right">
       <div className="right-computer">
@@ -19,7 +25,22 @@ function RightPlayer() {
           </div>
         </div>
         <div className="cards">
-          <ul className="play_3"></ul>
+          <ul className="play_3">
+            dddddd
+            {pokerStore.rightPoker.map((poker) => (
+              <li
+                key={uuid()}
+                data-num={poker.num}
+                data-color={poker.color}
+                style={{
+                  width: "125px",
+                  height: "175px",
+                  background: `url(${poker.background}) ${poker.x}px ${poker.y}px`,
+                  top: `${poker.top}px`,
+                }}
+              ></li>
+            ))}
+          </ul>
           <nav className="computer-status">
             <div className="get-boss">
               <button className="get">抢地主</button>
@@ -40,4 +61,4 @@ function RightPlayer() {
   );
 }
 
-export default RightPlayer;
+export default observer(RightPlayer);

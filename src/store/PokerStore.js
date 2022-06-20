@@ -1,26 +1,18 @@
 import { makeAutoObservable, observable } from "mobx";
 import xipai from "@/assets/music/xipai.mp3";
 import fapai from "@/assets/music/fapai.mp3";
+import { calcPosition } from "@/utils/util";
+
 class PokerStore {
   pokerList = observable([]);
   allPoker = observable([]);
-  pokerIndex = 0;
+  leftPoker = observable([]);
+  midPoker = observable([]);
+  rightPoker = observable([]);
   constructor() {
     makeAutoObservable(this);
     this.music = "";
     this.initAllPoker();
-  }
-
-  get leftPokerIndex() {
-    return this.pokerIndex;
-  }
-
-  get midPokerIndex() {
-    return this.pokerIndex + 1;
-  }
-
-  get rightPokerIndex() {
-    return this.pokerIndex + 2;
   }
 
   initAllPoker = () => {
@@ -95,6 +87,35 @@ class PokerStore {
     this.pokerList[index].animation = css.animation;
     this.pokerList[index].top = css.top;
     this.pokerList[index].left = css.left;
+
+    // 分发用户的牌
+    if (index >= 52) {
+      return;
+    }
+    const position = calcPosition(
+      this.allPoker[index].num,
+      this.allPoker[index].color
+    );
+    this.allPoker[index].x = position.x;
+    this.allPoker[index].y = position.y;
+    this.allPoker[index].background = position.background;
+
+    if (index % 3 === 0) {
+      this.allPoker[index].top = this.leftPoker.length * 20;
+      this.leftPoker.push(this.allPoker[index]);
+    }
+    if (index % 3 === 1) {
+      this.allPoker[index].left = this.midPoker.length * 25;
+      this.midPoker.push(this.allPoker[index]);
+    }
+    if (index % 3 === 2) {
+      this.allPoker[index].top = this.rightPoker.length * 20;
+      this.rightPoker.push(this.allPoker);
+    }
+  };
+
+  removePokerList = (index) => {
+    this.pokerList.splice(index, 1);
   };
 }
 
