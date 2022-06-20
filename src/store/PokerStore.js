@@ -50,6 +50,7 @@ class PokerStore {
         top: -i,
         animation: "",
         left: 0,
+        display: "1",
       });
     }
   };
@@ -89,9 +90,6 @@ class PokerStore {
     this.pokerList[index].left = css.left;
 
     // 分发用户的牌
-    if (index >= 52) {
-      return;
-    }
     const position = calcPosition(
       this.allPoker[index].num,
       this.allPoker[index].color
@@ -110,12 +108,15 @@ class PokerStore {
     }
     if (index % 3 === 2) {
       this.allPoker[index].top = this.rightPoker.length * 20;
-      this.rightPoker.push(this.allPoker);
+      this.rightPoker.push(this.allPoker[index]);
     }
   };
 
-  removePokerList = (index) => {
-    this.pokerList.splice(index, 1);
+  hidePoker = (index) => {
+    this.pokerList[index].display = "none";
+  };
+  removePokerList = () => {
+    this.pokerList = observable([]);
   };
 }
 

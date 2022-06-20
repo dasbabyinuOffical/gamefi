@@ -73,7 +73,12 @@ function MidPlayer() {
       setTimeout(() => {
         pokerStore.setAnimation(index, css);
       }, 100 * index);
-      console.log("sleep 1s");
+      setTimeout(() => {
+        pokerStore.hidePoker(index);
+      }, 115 * index);
+      setTimeout(() => {
+        pokerStore.removePokerList();
+      }, 115 * pokerStore.pokerList.length);
     });
   }
 
@@ -89,6 +94,7 @@ function MidPlayer() {
                 top: `${item.top}px`,
                 left: `${item.left}px`,
                 animation: item.animation,
+                display: item.display,
               }}
             ></li>
           ))}

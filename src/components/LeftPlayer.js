@@ -4,7 +4,6 @@ import uuid from "react-uuid";
 
 function LeftPlayer() {
   const { pokerStore } = useStore();
-  console.log(pokerStore.leftPoker.length);
   return (
     <div className="left">
       <div className="left-computer">

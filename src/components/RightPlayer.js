@@ -26,7 +26,6 @@ function RightPlayer() {
         </div>
         <div className="cards">
           <ul className="play_3">
-            dddddd
             {pokerStore.rightPoker.map((poker) => (
               <li
                 key={uuid()}
