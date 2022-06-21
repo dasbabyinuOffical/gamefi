@@ -76,12 +76,17 @@ function MidPlayer() {
       setTimeout(() => {
         pokerStore.hidePoker(index);
       }, 115 * index);
-      setTimeout(() => {
-        pokerStore.removePokerList();
-        pokerStore.sortPokers();
-        pokerStore.setPokerPosition();
-      }, 115 * pokerStore.pokerList.length);
     });
+
+    // 设置发牌后处理
+    setTimeout(() => {
+      pokerStore.removePokerList();
+      pokerStore.sortPokers();
+      pokerStore.setPokerPosition();
+
+      // 设置开始抢地主
+      pokerStore.grabBoss();
+    }, 115 * pokerStore.pokerList.length);
   }
 
   return (
@@ -106,7 +111,10 @@ function MidPlayer() {
         <nav className="player-status">
           {" "}
           {/*状态栏*/}
-          <div className="get-boss">
+          <div
+            className="get-boss"
+            style={{ display: pokerStore.round === 2 ? "block" : "none" }}
+          >
             <button className="get">抢地主</button>
             <button className="cancel"> 不抢</button>
           </div>
@@ -115,8 +123,11 @@ function MidPlayer() {
             <button className="play">出牌</button>
             <button className="cancel">过牌</button>
           </div>
-          <div className="timer">
-            <p className="time"></p>
+          <div
+            className="timer"
+            style={{ display: pokerStore.round === 2 ? "block" : "none" }}
+          >
+            <p className="time">{pokerStore.tick}</p>
           </div>
         </nav>
         <div className="player-console">

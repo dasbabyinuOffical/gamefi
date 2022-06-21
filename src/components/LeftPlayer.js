@@ -4,6 +4,7 @@ import uuid from "react-uuid";
 
 function LeftPlayer() {
   const { pokerStore } = useStore();
+
   return (
     <div className="left">
       <div className="left-computer">
@@ -41,17 +42,32 @@ function LeftPlayer() {
             ))}
           </ul>
           <nav className="computer-status">
-            <div className="get-boss">
-              <button className="get">抢地主</button>
-              <button className="cancel">不抢</button>
+            <div
+              className="get-boss"
+              style={{ display: pokerStore.round === 1 ? "block" : "none" }}
+            >
+              <button
+                className="get"
+                onClick={() => {
+                  console.log("click get");
+                }}
+              >
+                抢地主
+              </button>
+              <button className="cancel" onClick={pokerStore.grabBoss}>
+                不抢
+              </button>
             </div>
             <div className="play-btn">
               <button className="tishi">提示</button>
               <button className="play">出牌</button>
               <button className="cancel">过牌</button>
             </div>
-            <div className="timer">
-              <p className="time"></p>
+            <div
+              className="timer"
+              style={{ display: pokerStore.round === 1 ? "block" : "none" }}
+            >
+              <p className="time">{pokerStore.tick}</p>
             </div>
           </nav>
         </div>

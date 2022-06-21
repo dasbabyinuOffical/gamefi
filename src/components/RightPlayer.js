@@ -4,7 +4,6 @@ import uuid from "react-uuid";
 
 function RightPlayer() {
   const { pokerStore } = useStore();
-  console.log(pokerStore.rightPoker.length);
   return (
     <div className="right">
       <div className="right-computer">
@@ -41,7 +40,10 @@ function RightPlayer() {
             ))}
           </ul>
           <nav className="computer-status">
-            <div className="get-boss">
+            <div
+              className="get-boss"
+              style={{ display: pokerStore.round === 3 ? "block" : "none" }}
+            >
               <button className="get">抢地主</button>
               <button className="cancel">不抢</button>
             </div>
@@ -50,8 +52,11 @@ function RightPlayer() {
               <button className="play">出牌</button>
               <button className="cancel">过牌</button>
             </div>
-            <div className="timer">
-              <p className="time"></p>
+            <div
+              className="timer"
+              style={{ display: pokerStore.round === 3 ? "block" : "none" }}
+            >
+              <p className="time">{pokerStore.tick}</p>
             </div>
           </nav>
         </div>

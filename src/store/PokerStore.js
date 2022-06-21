@@ -1,7 +1,7 @@
 import { makeAutoObservable, observable } from "mobx";
 import xipai from "@/assets/music/xipai.mp3";
 import fapai from "@/assets/music/fapai.mp3";
-import { calcPosition } from "@/utils/util";
+import { calcPosition, loadOrStoreGold } from "@/utils/util";
 
 class PokerStore {
   pokerList = observable([]);
@@ -9,11 +9,97 @@ class PokerStore {
   leftPoker = observable([]);
   midPoker = observable([]);
   rightPoker = observable([]);
+
+  player = observable([]);
+  gameData = {};
+
+  //  当前应该是谁来出牌
+  round = 0;
+  // tick用来进行倒计时
+  tick = 0;
+
   constructor() {
     makeAutoObservable(this);
     this.music = "";
     this.initAllPoker();
+    this.initPlayer();
+    this.initGameData();
   }
+
+  // 设置1，2，3，分别为三个玩家出牌
+  increaseRound = () => {
+    this.round = (this.round % 3) + 1;
+    // 开始倒计时
+    if (this.ticker === undefined) {
+      this.tick = 10;
+      this.ticker = setInterval(() => {
+        this.tick -= 1;
+      }, 1000);
+
+      // 10秒后清除倒计时
+      setTimeout(() => {
+        clearInterval(this.ticker);
+        this.ticker = undefined;
+      }, 10000);
+    }
+  };
+
+  initGameData = () => {
+    /**
+     * 用于保存当局游戏的数据
+     */
+    let gameData = {
+      boss: null, //当前哪位玩家是地主
+      play: null, //当前到哪位玩家出牌
+
+      //  当前玩家选择中的的牌的数据
+      select: {
+        type: 0, //选中排队的牌型
+        poker: [], //选中牌的数据
+        max: 0, //选中牌的牌型中用于判断大小的值
+      },
+
+      //当前桌面牌组的数据
+      desktop: {
+        type: 0, //选中排队的牌型
+        poker: [], //选中牌的数据
+        max: 0, //选中牌的牌型中用于判断大小的值
+      },
+
+      multiple: 1, //本局游戏结算的倍数
+    };
+    this.gameData = gameData;
+  };
+
+  initPlayer = () => {
+    let player = [
+      {
+        name: "玩家1",
+        img: "",
+        gold: 10000,
+        poker: [],
+      },
+      {
+        name: "玩家2",
+        img: "",
+        gold: 10000,
+        poker: [],
+      },
+      {
+        name: "玩家3",
+        img: "",
+        gold: 10000,
+        poker: [],
+      },
+    ];
+
+    // 将玩家的金豆值改为本地存储的值
+    const goldarr = loadOrStoreGold();
+    for (let i = 0; i < 3; i++) {
+      player[i].gold = goldarr[i];
+    }
+    this.player = player;
+  };
 
   initAllPoker = () => {
     //将普通牌放入数据中
@@ -149,6 +235,11 @@ class PokerStore {
       item.top = index * 20;
       return item;
     });
+  };
+
+  // 抢地主函数
+  grabBoss = () => {
+    this.increaseRound();
   };
 }
 

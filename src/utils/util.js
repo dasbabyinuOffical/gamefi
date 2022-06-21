@@ -25,4 +25,18 @@ function calcPosition(num, color) {
   return { x: x, y: y, background: background };
 }
 
-export { calcPosition };
+function loadOrStoreGold() {
+  const sessionStorage = window.localStorage;
+  // 将值放入本地存储
+  if (sessionStorage.getItem("gold") == null) {
+    let goldarr = [10000, 10000, 10000];
+    sessionStorage.setItem("gold", JSON.stringify(goldarr));
+  }
+
+  // 将值取出来
+  let userJsonStr = sessionStorage.getItem("gold");
+  const goldarr = JSON.parse(userJsonStr);
+  return goldarr;
+}
+
+export { calcPosition, loadOrStoreGold };
