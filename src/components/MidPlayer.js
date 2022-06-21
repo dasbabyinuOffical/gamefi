@@ -78,6 +78,8 @@ function MidPlayer() {
       }, 115 * index);
       setTimeout(() => {
         pokerStore.removePokerList();
+        pokerStore.sortPokers();
+        pokerStore.setPokerPosition();
       }, 115 * pokerStore.pokerList.length);
     });
   }

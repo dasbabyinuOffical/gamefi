@@ -118,6 +118,38 @@ class PokerStore {
   removePokerList = () => {
     this.pokerList = observable([]);
   };
+
+  // 对牌排序
+  sortPokers = () => {
+    const pokers = [this.leftPoker, this.midPoker, this.rightPoker];
+    pokers.forEach((element) => {
+      element.sort((x, y) => {
+        if (x.num !== y.num) {
+          return x.num - y.num; // 如果点不同的话就按点数来排序
+        } else {
+          return x.color - y.color; // 如果点相同的话就按花色来的排序
+        }
+      });
+    });
+  };
+
+  // 重新设置三者牌的排列顺序
+  setPokerPosition = () => {
+    this.leftPoker = this.leftPoker.map((item, index) => {
+      item.top = index * 20;
+      return item;
+    });
+
+    this.midPoker = this.midPoker.map((item, index) => {
+      item.left = index * 25;
+      return item;
+    });
+
+    this.rightPoker = this.rightPoker.map((item, index) => {
+      item.top = index * 20;
+      return item;
+    });
+  };
 }
 
 export default PokerStore;
