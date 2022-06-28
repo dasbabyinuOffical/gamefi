@@ -31,7 +31,7 @@ class PokerStore {
     this.round = (this.round % 3) + 1;
     // 开始倒计时
     if (this.ticker === undefined) {
-      this.tick = 10;
+      this.tick = 9;
       this.ticker = setInterval(() => {
         this.tick -= 1;
       }, 1000);
@@ -40,7 +40,7 @@ class PokerStore {
       setTimeout(() => {
         clearInterval(this.ticker);
         this.ticker = undefined;
-      }, 10000);
+      }, 9000);
     }
   };
 

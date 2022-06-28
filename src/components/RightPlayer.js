@@ -45,7 +45,9 @@ function RightPlayer() {
               style={{ display: pokerStore.round === 3 ? "block" : "none" }}
             >
               <button className="get">抢地主</button>
-              <button className="cancel">不抢</button>
+              <button className="cancel" onClick={pokerStore.grabBoss}>
+                不抢
+              </button>
             </div>
             <div className="play-btn">
               <button className="tishi">提示</button>

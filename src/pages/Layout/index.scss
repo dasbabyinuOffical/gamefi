@@ -28,7 +28,6 @@ body {
 .bg {
     display: block;
     width: 100%;
-    z-index: -1;
     position: absolute;
 }
 
@@ -102,7 +101,6 @@ body {
     border-radius: 3px;
     background: url(../../assets/images/14.png) -88px -224px;
     position: absolute;
-    z-index: 100;
 }
 
 .play_1 {
@@ -149,12 +147,11 @@ body {
     height: 30px;
     display: block;
     float: left;
-    margin: 0 10px 0 20px;
+    margin: 0 10px 0 10px;
     border-radius: 5px;
     outline: none;
     border: none;
     background: brown;
-    z-index: 99;
 }
 
 .left .get-boss .get,
@@ -175,8 +172,15 @@ body {
     outline: none;
     border: none;
     background: brown;
-    z-index: 99;
 
+}
+
+.get{
+    cursor: pointer;
+}
+
+.cancel{
+    cursor: pointer;
 }
 
 .play_1 .on {
@@ -207,7 +211,6 @@ body {
     left: 50%;
     margin-left: -200px;
     text-align: center;
-    z-index: 200;
 }
 
 .popup .txt {
@@ -454,31 +457,28 @@ body {
     border-radius: 3px;
     background: url(../../assets/images/14.png) -88px -224px;
     position: absolute;
-    z-index: 100;
 }
 
 /* 定时器样式 */
 .timer {
-    width: 200px;
-    height: 200px;
+    width: 100px;
+    height: 100px;
     position: absolute;
-    margin: -231px 0px 0px 0px;
-    padding: 51px 0px 0 42px;
-    background: url(../../assets/images/time.png) no-repeat;
+    margin: -110px 0px 0px 45px;
+    padding: 0px 0px 0 0px;
+    background: url(../../assets/images/time.png);
     background-size: 100%;
-    z-index: 1;
     display: none;
 
 
 }
 
 .timer .time {
-    font-size: 25px;
-    font-weight: 100;
-    text-align: center;
+    font-size: 15px;
+    font-weight: 20;
     position: absolute;
-    left: 114px;
-    top: 93px;
+    left: 45px;
+    top: 33px;
     color: black;
 }
 
@@ -494,7 +494,6 @@ body {
     text-align: center;
     background: rgba(255, 252, 234);
     border-radius: 15px;
-    z-index: 200;
 }
 
 .end .role-wrap {
@@ -504,7 +503,6 @@ body {
     width: 203px;
     height: 233px;
     cursor: pointer;
-    z-index: 8;
     background: url(../../assets/images/role.png) -406px 0 no-repeat;
     background-size: 1015px 233px;
 }
@@ -581,7 +579,6 @@ body {
     position: fixed;
     bottom: 0px;
     left: 0px;
-    z-index: 100;
 }
 
 .music-on,
@@ -622,7 +619,6 @@ body {
     position: absolute;
     left: 10%;
     top: 0px;
-    z-index: 9;
 }
 
 .imgBox .boom {

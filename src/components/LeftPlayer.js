@@ -41,7 +41,7 @@ function LeftPlayer() {
               ></li>
             ))}
           </ul>
-          <nav className="computer-status">
+          <div className="computer-status">
             <div
               className="get-boss"
               style={{ display: pokerStore.round === 1 ? "block" : "none" }}
@@ -69,7 +69,7 @@ function LeftPlayer() {
             >
               <p className="time">{pokerStore.tick}</p>
             </div>
-          </nav>
+          </div>
         </div>
       </div>
     </div>
