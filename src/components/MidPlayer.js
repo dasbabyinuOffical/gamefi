@@ -115,7 +115,9 @@ function MidPlayer() {
             className="get-boss"
             style={{ display: pokerStore.round === 2 ? "block" : "none" }}
           >
-            <button className="get">抢地主</button>
+            <button className="get" onClick={() => pokerStore.makeBoss(2)}>
+              抢地主
+            </button>
             <button className="cancel" onClick={() => pokerStore.grabBoss(10)}>
               不抢
             </button>

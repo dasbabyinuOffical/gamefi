@@ -44,7 +44,9 @@ function RightPlayer() {
               className="get-boss"
               style={{ display: pokerStore.round === 3 ? "block" : "none" }}
             >
-              <button className="get">抢地主</button>
+              <button className="get" onClick={() => pokerStore.makeBoss(3)}>
+                抢地主
+              </button>
               <button
                 className="cancel"
                 onClick={() => pokerStore.grabBoss(10)}

@@ -46,12 +46,7 @@ function LeftPlayer() {
               className="get-boss"
               style={{ display: pokerStore.round === 1 ? "block" : "none" }}
             >
-              <button
-                className="get"
-                onClick={() => {
-                  console.log("click get");
-                }}
-              >
+              <button className="get" onClick={() => pokerStore.makeBoss(1)}>
                 抢地主
               </button>
               <button

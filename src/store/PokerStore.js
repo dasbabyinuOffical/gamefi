@@ -241,6 +241,16 @@ class PokerStore {
   grabBoss = (times) => {
     this.increaseRound(times);
   };
+
+  // 确定地主
+  makeBoss = (index) => {
+    if (this.ticker !== undefined) {
+      clearInterval(this.ticker);
+      this.ticker = undefined;
+    }
+    this.round = 0;
+    console.log("地主是:", index);
+  };
 }
 
 export default PokerStore;
