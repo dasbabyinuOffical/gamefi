@@ -54,7 +54,10 @@ function LeftPlayer() {
               >
                 抢地主
               </button>
-              <button className="cancel" onClick={pokerStore.grabBoss}>
+              <button
+                className="cancel"
+                onClick={() => pokerStore.grabBoss(10)}
+              >
                 不抢
               </button>
             </div>

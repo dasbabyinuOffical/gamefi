@@ -85,7 +85,7 @@ function MidPlayer() {
       pokerStore.setPokerPosition();
 
       // 设置开始抢地主
-      pokerStore.grabBoss();
+      pokerStore.grabBoss(10);
     }, 115 * pokerStore.pokerList.length);
   }
 
@@ -116,7 +116,7 @@ function MidPlayer() {
             style={{ display: pokerStore.round === 2 ? "block" : "none" }}
           >
             <button className="get">抢地主</button>
-            <button className="cancel" onClick={pokerStore.grabBoss}>
+            <button className="cancel" onClick={() => pokerStore.grabBoss(10)}>
               不抢
             </button>
           </div>

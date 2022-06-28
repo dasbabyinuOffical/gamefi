@@ -27,21 +27,21 @@ class PokerStore {
   }
 
   // 设置1，2，3，分别为三个玩家出牌
-  increaseRound = () => {
+  increaseRound = (times = 10) => {
     this.round = (this.round % 3) + 1;
-    // 开始倒计时
-    if (this.ticker === undefined) {
-      this.tick = 9;
-      this.ticker = setInterval(() => {
-        this.tick -= 1;
-      }, 1000);
-
-      // 10秒后清除倒计时
-      setTimeout(() => {
-        clearInterval(this.ticker);
-        this.ticker = undefined;
-      }, 9000);
+    if (this.ticker !== undefined) {
+      clearInterval(this.ticker);
+      this.ticker = undefined;
     }
+    // 开始倒计时
+    this.tick = times;
+    this.ticker = setInterval(() => {
+      this.tick -= 1;
+      if (this.tick === 0) {
+        this.round = (this.round % 3) + 1;
+        this.tick = 10;
+      }
+    }, times * 100);
   };
 
   initGameData = () => {
@@ -238,8 +238,8 @@ class PokerStore {
   };
 
   // 抢地主函数
-  grabBoss = () => {
-    this.increaseRound();
+  grabBoss = (times) => {
+    this.increaseRound(times);
   };
 }
 
