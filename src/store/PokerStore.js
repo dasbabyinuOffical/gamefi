@@ -1,7 +1,7 @@
 import { makeAutoObservable, observable } from "mobx";
 import xipai from "@/assets/music/xipai.mp3";
 import fapai from "@/assets/music/fapai.mp3";
-import { calcPosition, loadOrStoreGold } from "@/utils/util";
+import { calcPosition, loadOrStoreGold, makeTheBoss } from "@/utils/util";
 
 class PokerStore {
   pokerList = observable([]);
@@ -183,6 +183,7 @@ class PokerStore {
     this.allPoker[index].x = position.x;
     this.allPoker[index].y = position.y;
     this.allPoker[index].background = position.background;
+    this.allPoker[index].on = false;
 
     if (index % 3 === 0) {
       this.allPoker[index].top = this.leftPoker.length * 20;
@@ -249,6 +250,7 @@ class PokerStore {
       this.ticker = undefined;
     }
     this.round = 0;
+    makeTheBoss(index);
     console.log("地主是:", index);
   };
 }

@@ -153,7 +153,7 @@ function MidPlayer() {
           </div>
           <div className="cards">
             <ul className="play_2">
-              {pokerStore.midPoker.map((poker) => (
+              {pokerStore.midPoker.map((poker, index) => (
                 <li
                   key={uuid()}
                   data-num={poker.num}
@@ -163,6 +163,11 @@ function MidPlayer() {
                     height: "175px",
                     background: `url(${poker.background}) ${poker.x}px ${poker.y}px`,
                     left: `${poker.left}px`,
+                  }}
+                  className={poker.on ? "on" : ""}
+                  onClick={() => {
+                    pokerStore.midPoker[index].on =
+                      !pokerStore.midPoker[index].on;
                   }}
                 ></li>
               ))}

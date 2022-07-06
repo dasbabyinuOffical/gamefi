@@ -27,7 +27,7 @@ function LeftPlayer() {
         </div>
         <div className="cards">
           <ul className="play_1">
-            {pokerStore.leftPoker.map((poker) => (
+            {pokerStore.leftPoker.map((poker, index) => (
               <li
                 key={uuid()}
                 data-num={poker.num}
@@ -37,6 +37,11 @@ function LeftPlayer() {
                   height: "175px",
                   background: `url(${poker.background}) ${poker.x}px ${poker.y}px`,
                   top: `${poker.top}px`,
+                }}
+                className={poker.on ? "on" : ""}
+                onClick={() => {
+                  pokerStore.leftPoker[index].on =
+                    !pokerStore.leftPoker[index].on;
                 }}
               ></li>
             ))}

@@ -39,4 +39,12 @@ function loadOrStoreGold() {
   return goldarr;
 }
 
-export { calcPosition, loadOrStoreGold };
+function makeTheBoss(index) {
+  window.localStorage.setItem("boass", index);
+}
+
+function getTheBoss() {
+  return window.localStorage.getItem("boss");
+}
+
+export { calcPosition, loadOrStoreGold, makeTheBoss, getTheBoss };

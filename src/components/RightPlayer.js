@@ -25,7 +25,7 @@ function RightPlayer() {
         </div>
         <div className="cards">
           <ul className="play_3">
-            {pokerStore.rightPoker.map((poker) => (
+            {pokerStore.rightPoker.map((poker, index) => (
               <li
                 key={uuid()}
                 data-num={poker.num}
@@ -35,6 +35,11 @@ function RightPlayer() {
                   height: "175px",
                   background: `url(${poker.background}) ${poker.x}px ${poker.y}px`,
                   top: `${poker.top}px`,
+                }}
+                className={poker.on ? "on" : ""}
+                onClick={() => {
+                  pokerStore.rightPoker[index].on =
+                    !pokerStore.rightPoker[index].on;
                 }}
               ></li>
             ))}
