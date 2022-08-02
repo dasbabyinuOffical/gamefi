@@ -59,7 +59,12 @@ function RightPlayer() {
                 不抢
               </button>
             </div>
-            <div className="play-btn">
+            <div
+              className="play-btn"
+              style={{
+                display: pokerStore.currentPlayer === 3 ? "block" : "none",
+              }}
+            >
               <button className="tishi">提示</button>
               <button className="play">出牌</button>
               <button className="cancel">过牌</button>

@@ -13,8 +13,10 @@ class PokerStore {
   player = observable([]);
   gameData = {};
 
-  //  当前应该是谁来出牌
+  //  当前应该是谁来抢地主
   round = 0;
+  //  谁来出牌
+  currentPlayer = 0;
   // tick用来进行倒计时
   tick = 0;
 
@@ -250,6 +252,7 @@ class PokerStore {
       this.ticker = undefined;
     }
     this.round = 0;
+    this.currentPlayer = index;
     makeTheBoss(index);
     console.log("地主是:", index);
   };
